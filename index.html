@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Spit-Out T-Shirt Machine | Robert Marleton</title>
+  <meta name="description" content="An interactive creative-thinking experiment that turns words, observations and unexpected connections into wearable concepts through wordplay, linguistic collisions and generative design.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Spit-Out T-Shirt Machine | Wordplay + Generative Design">
+  <meta property="og:description" content="Feed it a thought. The machine pushes it somewhere unexpected, turning language and connections into potential wearable ideas.">
+  <meta property="og:url" content="https://rm337.github.io/My-Projects-/">
+  <meta property="og:image" content="https://screenshot2.lovable.dev/d47494badcf60d4d737eb61c5cf0cdd4/id-preview-230b9e5c--a44b6457-c974-4b16-8b2b-16bd7a70cd26.lovable.app-1787514710213.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spit-Out T-Shirt Machine | Wordplay + Generative Design">
+  <meta name="twitter:description" content="An interactive machine for turning language, wordplay and unexpected connections into wearable concepts.">
+  <meta name="twitter:image" content="https://screenshot2.lovable.dev/d47494badcf60d4d737eb61c5cf0cdd4/id-preview-230b9e5c--a44b6457-c974-4b16-8b2b-16bd7a70cd26.lovable.app-1787514710213.png">
+  <link rel="canonical" href="https://rm337.github.io/My-Projects-/">
+  <style>
+    :root{--bg:#030711;--panel:#071425;--blue:#0174f3;--cyan:#64ddff;--ink:#eaf5ff;--muted:#8fa5bb;--line:rgba(130,195,255,.18)}
+    *{box-sizing:border-box}
+    html{background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0%,rgba(1,116,243,.22),transparent 38%),linear-gradient(160deg,#02050c 0%,#071425 55%,#02050c 100%)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+    main{position:relative;z-index:1;width:min(1120px,calc(100% - 32px));margin:auto;padding:64px 0 72px}
+    .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan)}
+    .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:42px;align-items:center;min-height:72vh}
+    h1{font-size:clamp(3.4rem,8vw,7.5rem);line-height:.88;letter-spacing:-.055em;margin:16px 0 24px;max-width:760px}
+    .lede{font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.55;color:#c3d1df;max-width:660px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;border-radius:999px;text-decoration:none;font-weight:800;letter-spacing:.02em;border:1px solid var(--line);transition:.2s ease}
+    .btn.primary{background:var(--blue);border-color:transparent;color:white;box-shadow:0 16px 44px rgba(1,116,243,.28)}
+    .btn.secondary{color:#dbeeff;background:rgba(255,255,255,.035)}
+    .btn:hover{transform:translateY(-2px)}
+    .machine{position:relative;min-height:460px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,rgba(1,116,243,.12),rgba(4,11,22,.86));box-shadow:0 36px 100px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;padding:24px}
+    .machine:before,.machine:after{content:"";position:absolute;border-radius:50%;border:1px dashed rgba(100,221,255,.32);left:50%;top:48%;transform:translate(-50%,-50%)}
+    .machine:before{width:270px;height:270px;animation:spin 18s linear infinite}
+    .machine:after{width:180px;height:180px;animation:spin 10s linear infinite reverse}
+    .screen{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:165px;height:165px;border-radius:50%;display:grid;place-items:center;text-align:center;padding:20px;background:radial-gradient(circle,rgba(1,116,243,.42),rgba(1,116,243,.1) 58%,rgba(1,116,243,.02));box-shadow:0 0 70px rgba(1,116,243,.35);font-weight:800;line-height:1.1}
+    .label{position:absolute;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:800}
+    .l1{top:28px;left:28px}.l2{top:28px;right:28px}.l3{bottom:28px;left:28px}.l4{bottom:28px;right:28px}
+    .flow{margin-top:36px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+    .flow div{background:rgba(4,11,22,.88);padding:20px}.flow strong{display:block;font-size:.73rem;text-transform:uppercase;letter-spacing:.12em;color:var(--cyan);margin-bottom:8px}.flow span{color:#c4d2df;line-height:1.45}
+    .note{margin-top:22px;color:var(--muted);font-size:.92rem;max-width:760px}
+    @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+    @media(max-width:820px){.hero{grid-template-columns:1fr;min-height:auto}.machine{min-height:380px}.flow{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){main{padding-top:38px}.flow{grid-template-columns:1fr}h1{font-size:clamp(3rem,16vw,5rem)}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Robert Marleton / Interactive Creative System</p>
+      <h1>Spit-Out<br>T-Shirt<br>Machine</h1>
+      <p class="lede">An interactive design experiment that begins with a human thought and pushes it through wordplay, alternate meanings, phonetic collisions, reversals and unexpected associations until something wearable falls out.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://robert-marleton.lovable.app/fabricator" target="_blank" rel="noopener noreferrer">Launch the Machine ↗</a>
+        <a class="btn secondary" href="https://robert-marleton.lovable.app/workshop" target="_blank" rel="noopener noreferrer">Explore Idea Fabricator</a>
+      </div>
+      <p class="note">The original thought comes from the human. The machine helps push it somewhere unexpected. AI amplifies the creative process rather than replacing it.</p>
+    </div>
+    <div class="machine" aria-label="Abstract visualization of the Spit-Out T-Shirt Machine">
+      <span class="label l1">Thought seed</span><span class="label l2">Word collision</span><span class="label l3">Twist / flip / sound</span><span class="label l4">Wearable idea</span>
+      <div class="screen">WORDS IN.<br>IDEAS OUT.</div>
+    </div>
+  </section>
+  <section class="flow" aria-label="How the machine works">
+    <div><strong>01 / Feed</strong><span>Start with a phrase, observation, topic or ridiculous little thought.</span></div>
+    <div><strong>02 / Collide</strong><span>The system searches for linguistic and conceptual connections.</span></div>
+    <div><strong>03 / Push</strong><span>Twist it, flip it, sound it out, make it smarter or take it further.</span></div>
+    <div><strong>04 / Spit Out</strong><span>Candidate T-shirt phrases arrive with reasoning and visual direction.</span></div>
+  </section>
+</main>
+</body>
+</html>
