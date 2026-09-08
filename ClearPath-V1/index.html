@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ClearPath makes everyday language easier to understand.">
+  <title>ClearPath — Everyday Understanding</title>
+  <style>
+    :root{--blue:#0174f3;--blue2:#005ac0;--paper:#f7f4ed;--ink:#172033;--soft:#596276;--line:#ccd3df;--card:rgba(255,255,255,.82);font-size:17px}
+    *{box-sizing:border-box}body{margin:0;color:var(--ink);background:radial-gradient(circle at 50% -10%,#dcecff 0,transparent 38%),var(--paper);font-family:Arial,sans-serif;line-height:1.55}button,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(720px,calc(100% - 32px));margin:auto;padding:20px 0 48px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 40px rgba(23,32,51,.08)}header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px}.brand{display:flex;align-items:center;gap:12px}.mark{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:var(--blue);color:white;font-weight:900;font-size:22px}.brand strong{display:block;font-size:20px}.brand small,.eyebrow,label{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--soft)}.controls{display:flex;gap:6px;flex-wrap:wrap}.controls button,.secondary{min-height:44px;border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink);padding:8px 12px}.hero{padding:34px 4px 20px}.eyebrow{color:var(--blue);font-weight:700}.hero h1{font-size:clamp(34px,7vw,54px);line-height:1.04;margin:8px 0 12px;letter-spacing:-.035em}.hero p{font-size:19px;color:var(--soft);max-width:590px}.input-card{padding:20px}label{display:block;margin-bottom:7px}textarea{width:100%;min-height:150px;resize:vertical;border:1px solid var(--line);border-radius:15px;background:#fff;padding:14px;color:var(--ink);font-size:18px}textarea:focus,button:focus-visible{outline:3px solid rgba(1,116,243,.28);outline-offset:2px}.actions{display:grid;gap:11px;margin:18px 0}.action{display:flex;text-align:left;align-items:center;gap:14px;width:100%;padding:15px 17px;border:1px solid var(--line);border-radius:17px;background:var(--card);color:var(--ink)}.action:hover{border-color:var(--blue);transform:translateY(-1px)}.num{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:12px;background:#e5f1ff;color:var(--blue);font-weight:900}.action strong{display:block;font-size:18px}.action span:last-child small{display:block;color:var(--soft);font-size:15px}.notice{display:none;padding:15px 18px;border:2px solid var(--blue);border-radius:15px;background:#e8f3ff;margin:16px 0}.result{display:none;padding:22px;margin-top:20px}.result h2{margin:5px 0 10px;font-size:26px}.result-text{white-space:pre-wrap;font-size:18px;color:var(--soft)}.step-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700}.result-buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}.primary{min-height:50px;border:0;border-radius:12px;background:var(--blue);color:white;font-weight:800;padding:10px 15px}.primary:hover{background:var(--blue2)}.secondary{font-weight:700}.wide{grid-column:1/-1}.private{margin-top:14px;color:var(--soft);font-size:14px}.tagline{margin-top:28px;text-align:center;color:var(--blue);font-weight:800}.contrast{--paper:#fff;--ink:#000;--soft:#222;--line:#333;--card:#fff}.reduced *{scroll-behavior:auto!important;transition:none!important}.large{font-size:20px}@media(max-width:560px){header{align-items:flex-start;flex-direction:column}.result-buttons{grid-template-columns:1fr}.wide{grid-column:auto}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="card">
+      <div class="brand"><div class="mark" aria-hidden="true">C</div><div><strong>ClearPath</strong><small>Adaptive understanding</small></div></div>
+      <div class="controls" aria-label="Accessibility controls"><button id="textSize" type="button">Larger text</button><button id="contrast" type="button">High contrast</button><button id="motion" type="button">Reduce motion</button></div>
+    </header>
+
+    <main>
+      <section class="hero"><div class="eyebrow">Start here</div><h1>What do you need help understanding?</h1><p>Paste or type a letter, form, instruction, or message. Choose what you need, and ClearPath will work with it immediately.</p></section>
+
+      <section class="input-card card"><label for="source">Your text</label><textarea id="source" placeholder="Type or paste here…"></textarea><div class="private">Your words stay in this browser. Nothing is uploaded or sent.</div></section>
+
+      <section class="actions" aria-label="Choose how ClearPath should help">
+        <button class="action" data-mode="simplify"><span class="num">1</span><span><strong>Make it simpler</strong><small>Rewrite it with clearer, more direct wording.</small></span></button>
+        <button class="action" data-mode="steps"><span class="num">2</span><span><strong>One step at a time</strong><small>Separate the information into manageable steps.</small></span></button>
+        <button class="action" data-mode="show"><span class="num">3</span><span><strong>Show me</strong><small>Show the main point and what it means in practice.</small></span></button>
+        <button class="action" data-mode="read"><span class="num">4</span><span><strong>Read it to me</strong><small>Prepare the words and read them aloud.</small></span></button>
+        <button class="action" data-mode="respond"><span class="num">5</span><span><strong>Help me respond</strong><small>Identify what is being asked and prepare a reply.</small></span></button>
+      </section>
+
+      <div id="notice" class="notice" role="alert"></div>
+      <section id="result" class="result card" tabindex="-1" aria-live="polite">
+        <div id="modeLabel" class="eyebrow"></div><h2 id="resultTitle"></h2><div id="resultText" class="result-text"></div>
+        <div class="result-buttons">
+          <button id="another" class="secondary" type="button">Explain another way</button><button id="example" class="secondary" type="button">Give me an example</button>
+          <button id="speak" class="secondary" type="button">Read aloud</button><button id="copy" class="secondary" type="button">Copy result</button>
+          <button id="startOver" class="primary wide" type="button">Start over</button>
+        </div>
+      </section>
+    </main>
+    <footer><p class="tagline">A Little Ink. A Lot of Soul. The Color Blue.</p></footer>
+  </div>
+  <script>
+    (()=>{
+      const source=document.querySelector('#source'),result=document.querySelector('#result'),title=document.querySelector('#resultTitle'),output=document.querySelector('#resultText'),label=document.querySelector('#modeLabel'),notice=document.querySelector('#notice');
+      let mode='simplify',step=0,steps=[];
+      const replacements=[[/\bprior to\b/gi,'before'],[/\bin order to\b/gi,'to'],[/\bat this point in time\b/gi,'now'],[/\bapproximately\b/gi,'about'],[/\badditional\b/gi,'more'],[/\bassistance\b/gi,'help'],[/\bcommence\b/gi,'start'],[/\bcomplete\b/gi,'finish'],[/\bdemonstrate\b/gi,'show'],[/\bdetermine\b/gi,'find out'],[/\bensure\b/gi,'make sure'],[/\bmodify\b/gi,'change'],[/\bprovide\b/gi,'give'],[/\bregarding\b/gi,'about'],[/\brequest\b/gi,'ask'],[/\butilize\b/gi,'use']];
+      const clean=t=>t.trim().replace(/\r/g,'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n');
+      const sentences=t=>(clean(t).match(/[^.!?\n]+[.!?]?/g)||[]).map(s=>s.trim()).filter(Boolean);
+      const simple=t=>{let s=clean(t);replacements.forEach(([a,b])=>s=s.replace(a,b));return sentences(s).map(x=>x.length>150?x.replace(/;\s*/g,'.\n'):x).join('\n\n')};
+      const showNotice=t=>{notice.textContent=t;notice.style.display='block';result.style.display='none'};
+      const display=(heading,text,modeName)=>{notice.style.display='none';title.textContent=heading;output.textContent=text;label.textContent=modeName;result.style.display='block';setTimeout(()=>result.focus(),20)};
+      const run=(next,variant='')=>{
+        const raw=clean(source.value);if(!raw){showNotice('Please type or paste something first.');source.focus();return}mode=next;
+        if(next==='simplify'){let text=simple(raw);if(variant==='another')text=sentences(text).map((s,i)=>`${i+1}. ${s}`).join('\n');if(variant==='example')text=`Main point:\n${sentences(text)[0]||text}\n\nIn practice, focus on that point first, then check the remaining details one at a time.`;display('A clearer version',text,'Make it simpler')}
+        if(next==='steps'){steps=sentences(raw).map(s=>s.replace(/^[-•\d.)\s]+/,'')).filter(Boolean);if(!steps.length)steps=[raw];step=0;display('One step at a time',`Step 1 of ${steps.length}\n\n${steps[0]}`,'One step at a time');addNext()}
+        if(next==='show'){const parts=sentences(raw);display('What this means',`The main point is:\n${parts[0]||raw}\n\nWhat to look at next:\n${parts.slice(1,3).join(' ')||'There are no additional details in the text.'}`,'Show me')}
+        if(next==='read'){const spoken=raw.replace(/&/g,' and ').replace(/\bNo\./g,'Number').replace(/[•*_#]/g,'');display('Ready to read aloud',spoken,'Read it to me');speak(spoken)}
+        if(next==='respond'){const first=sentences(raw)[0]||raw;display('Suggested response',`What they appear to be asking about:\n${first}\n\nSuggested reply:\nThank you for your message. I understand what you are asking. Please confirm the specific next step and any deadline I need to know. Once I have that information, I can respond clearly.\n\nNothing has been sent. You decide whether to use or change this reply.`,'Help me respond')}
+      };
+      const addNext=()=>{document.querySelector('#nextStep')?.remove();if(step<steps.length-1){const b=document.createElement('button');b.id='nextStep';b.className='primary';b.textContent='Next step';b.onclick=()=>{step++;output.textContent=`Step ${step+1} of ${steps.length}\n\n${steps[step]}`;if(step===steps.length-1)b.remove()};result.querySelector('.result-buttons').prepend(b)}};
+      const speak=t=>{if(!('speechSynthesis'in window)){showNotice('This browser cannot read text aloud.');return}speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(t))};
+      document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>run(b.dataset.mode));
+      document.querySelector('#another').onclick=()=>run(mode,'another');document.querySelector('#example').onclick=()=>run(mode,'example');document.querySelector('#speak').onclick=()=>speak(output.textContent);
+      document.querySelector('#copy').onclick=async()=>{await navigator.clipboard.writeText(output.textContent);document.querySelector('#copy').textContent='Copied';setTimeout(()=>document.querySelector('#copy').textContent='Copy result',1200)};
+      document.querySelector('#startOver').onclick=()=>{window.speechSynthesis?.cancel();source.value='';result.style.display='none';notice.style.display='none';source.focus()};
+      document.querySelector('#textSize').onclick=()=>document.documentElement.classList.toggle('large');document.querySelector('#contrast').onclick=()=>document.documentElement.classList.toggle('contrast');document.querySelector('#motion').onclick=()=>document.documentElement.classList.toggle('reduced');
+    })();
+  </script>
+</body>
+</html>
