@@ -1,4 +1,4 @@
-name: Deploy Spit-Out T-Shirt Machine
+name: Deploy browser apps to GitHub Pages
 
 on:
   push:
