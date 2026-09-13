@@ -5,11 +5,12 @@ const vocab={instink:['stink','stinked','clinked','ink'],facation:['vacation','f
 const esc=s=>(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
 function save(){localStorage.setItem('fluie-editor',editor.value);$('#saveStatus').textContent='AUTOSAVED'}
 function count(){const n=editor.value.trim()?editor.value.trim().split(/\s+/).length:0;$('#wordCount').textContent=`${n} WORD${n===1?'':'S'}`}
-function addBranch(label,text){const b=document.createElement('button');b.className='branch';b.innerHTML=`<small>${esc(label)}</small><b>${esc(text)}</b>`;b.onclick=()=>{editor.value+=(editor.value?'\n':'')+text;count();save();b.style.borderColor='var(--green)'};branches.appendChild(b)}
+function addBranch(label,text){const b=document.createElement('button');b.className='branch';b.innerHTML=`<small>${esc(label)}</small><b>${esc(text)}</b>`;b.onclick=()=>{editor.value+=(editor.value?'\n':'')+text;count();save();b.style.borderColor='var(--green)';window.FLUIE_DNA?.favorite(text)};branches.appendChild(b)}
 function reflex(raw){const value=(raw||seed.value).trim();if(!value)return;const word=value.split(/\s+/)[0].toLowerCase(),alts=vocab[word]||[word+'ish','un'+word,'de-'+word],half=Math.max(2,Math.floor(word.length/2));branches.innerHTML='';addBranch('WORD CONDESTRUCTION',word.slice(0,half)+' + '+word.slice(half));addBranch('WRONG EXITS',alts.join(' • '));addBranch('POETIC POSSIBILITY',`${word} took the wrong exit and came back as ${alts[0]}.`);$('#reflexStatus').textContent='CREATIVE REFLEX ENGAGED';$('#headScreen').textContent='LEXICAL WOBBLE DETECTED';$('#core').classList.add('pulse');setTimeout(()=>{$('#core').classList.remove('pulse');$('#headScreen').textContent='CREATIVE REFLEX: APPOOVED'},900)}
 $('#releaseBtn').onclick=()=>reflex();seed.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();reflex()}};seed.oninput=()=>{clearTimeout(seed.t);seed.t=setTimeout(()=>seed.value.trim()&&reflex(),450)};editor.oninput=()=>{count();clearTimeout(editor.t);editor.t=setTimeout(save,180)};$('#pricingBtn').onclick=()=>$('#pricingDialog').showModal();$('#bigLever').onclick=e=>{e.currentTarget.classList.toggle('pulled');reflex(seed.value||'word')};$('#checkpointBtn').onclick=()=>{$('#saveStatus').textContent='CHECKPOINT SAVED';localStorage.setItem('fluie-checkpoint',editor.value)};$$('#sillyModes button').forEach(b=>b.onclick=()=>{b.classList.toggle('active');reflex((seed.value||'word')+' '+b.dataset.mode)});$('#collisionMeter').oninput=e=>$('#collisionValue').textContent=e.target.value;
 editor.value=localStorage.getItem('fluie-editor')||'';count();
 import('./punctinary.js');
 import('./interlace.js');
-import('./tools.js').catch(()=>{});
+import('./tools.js');
+import('./brain.js');
 console.info('FLUIE loaded',chain);
