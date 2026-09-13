@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#07111F" />
-  <title>FLUIE — Fluid Literary Understanding & Intelligence Engine</title>
-  <meta name="description" content="FLUIE: a ridiculous literary robot with a serious writing brain." />
+  <title>OH MY WORD? — Powered by FLUIE</title>
+  <meta name="description" content="OH MY WORD? is a ridiculous literary machine powered by FLUIE, the Fluid Literary Understanding & Intelligence Engine." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
@@ -13,8 +13,8 @@
   <header class="topbar">
     <div>
       <span class="eyebrow">FLUID SYSTEMS / LANGUAGE LAB</span>
-      <h1>FLUIE<span class="blink-dot">.</span></h1>
-      <p class="subtitle">Fluid Literary Understanding &amp; Intelligence Engine</p>
+      <h1>OH MY WORD?<span class="blink-dot">!</span></h1>
+      <p class="subtitle">Powered by FLUIE • Fluid Literary Understanding &amp; Intelligence Engine</p>
     </div>
     <div class="top-actions">
       <button class="ghost" id="checkpointBtn">SAVE CHECKPOINT</button>
@@ -24,7 +24,7 @@
   </header>
 
   <main class="stage">
-    <aside class="left-rig" aria-label="FLUIE instruments">
+    <aside class="left-rig" aria-label="OH MY WORD instruments">
       <section class="gauge-stack panel-metal">
         <h2>LAB READOUT</h2>
         <div class="gauge"><label>PUN PRESSURE</label><meter id="punMeter" min="0" max="100" value="63"></meter><output id="punValue">63%</output></div>
@@ -35,156 +35,48 @@
 
       <section class="wrong-exit panel-metal" id="wrongExitPanel">
         <div class="road-sign">↗</div>
-        <div>
-          <strong>WORD TOOK WRONG EXIT</strong>
-          <small>DO NOT REROUTE.<br />SOMETHING INTERESTING IS HAPPENING.</small>
-        </div>
+        <div><strong>WORD TOOK WRONG EXIT</strong><small>DO NOT REROUTE.<br />SOMETHING INTERESTING IS HAPPENING.</small></div>
       </section>
     </aside>
 
-    <section class="robot-zone" aria-label="FLUIE robot interface">
-      <div class="antenna antenna-q" aria-hidden="true">?</div>
-      <div class="antenna antenna-bang" aria-hidden="true">!</div>
-
+    <section class="robot-zone" aria-label="OH MY WORD robot interface">
+      <div class="antenna antenna-q" aria-hidden="true">?</div><div class="antenna antenna-bang" aria-hidden="true">!</div>
       <div class="head shell">
-        <div class="eye eye-big" id="eyeBig"><span></span></div>
-        <div class="eye eye-small"><span></span></div>
-        <div class="brain-label">CREATIVE REFLEX</div>
-        <div class="head-screen" id="headScreen">LEXICAL WOBBLE: NOMINAL</div>
+        <div class="eye eye-big" id="eyeBig"><span></span></div><div class="eye eye-small"><span></span></div>
+        <div class="brain-label">CREATIVE REFLEX</div><div class="head-screen" id="headScreen">OH. MY. WORD.</div>
       </div>
 
-      <div class="gear gear-left" aria-label="Word gear: grammar slammer">
-        <svg viewBox="0 0 220 220" role="img" aria-label="Rotating word gear made from GRAMMAR and SLAMMER">
-          <defs><path id="gearPath1" d="M110,110 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
-          <circle cx="110" cy="110" r="72" class="gear-ring" />
-          <text class="gear-text"><textPath href="#gearPath1" startOffset="0%">GRAMMAR • SLAMMER • SENTENCE • TIME • </textPath></text>
-          <circle cx="110" cy="110" r="22" class="gear-hub" />
-        </svg>
-      </div>
-
-      <div class="gear gear-right" aria-label="Word gear: verse reverse curse rhyme">
-        <svg viewBox="0 0 220 220" role="img" aria-label="Rotating word gear made from VERSE REVERSE AND CURSE AND RHYME">
-          <defs><path id="gearPath2" d="M110,110 m-78,0 a78,78 0 1,0 156,0 a78,78 0 1,0 -156,0" /></defs>
-          <circle cx="110" cy="110" r="72" class="gear-ring" />
-          <text class="gear-text"><textPath href="#gearPath2" startOffset="0%">VERSE • REVERSE • AND CURSE • AND RHYME • </textPath></text>
-          <circle cx="110" cy="110" r="22" class="gear-hub" />
-        </svg>
-      </div>
-
-      <div class="arm arm-left" aria-hidden="true"><div class="pencil-nib">✎</div></div>
-      <div class="arm arm-right" aria-hidden="true"><div class="quote-claw">“ ”</div></div>
+      <div class="gear gear-left" aria-label="Word gear: grammar slammer"><svg viewBox="0 0 220 220" role="img" aria-label="Rotating word gear made from GRAMMAR and SLAMMER"><defs><path id="gearPath1" d="M110,110 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs><circle cx="110" cy="110" r="72" class="gear-ring" /><text class="gear-text"><textPath href="#gearPath1" startOffset="0%">GRAMMAR • SLAMMER • SENTENCE • TIME • </textPath></text><circle cx="110" cy="110" r="22" class="gear-hub" /></svg></div>
+      <div class="gear gear-right" aria-label="Word gear: verse reverse curse rhyme"><svg viewBox="0 0 220 220" role="img" aria-label="Rotating word gear made from VERSE REVERSE AND CURSE AND RHYME"><defs><path id="gearPath2" d="M110,110 m-78,0 a78,78 0 1,0 156,0 a78,78 0 1,0 -156,0" /></defs><circle cx="110" cy="110" r="72" class="gear-ring" /><text class="gear-text"><textPath href="#gearPath2" startOffset="0%">VERSE • REVERSE • AND CURSE • AND RHYME • </textPath></text><circle cx="110" cy="110" r="22" class="gear-hub" /></svg></div>
+      <div class="arm arm-left" aria-hidden="true"><div class="pencil-nib">✎</div></div><div class="arm arm-right" aria-hidden="true"><div class="quote-claw">“ ”</div></div>
 
       <div class="torso shell">
-        <div class="torso-plaque">
-          <strong>GRAMMATICALLY WRONG.</strong>
-          <span>CREATIVELY RIGHT.</span>
-        </div>
-
-        <section class="seed-console">
-          <label for="seedInput">FEED FLUIE A WORD / PHRASE / TYPO / IDEA</label>
-          <div class="seed-row">
-            <input id="seedInput" autocomplete="off" placeholder="Try: instink, facation, punctination…" />
-            <button id="releaseBtn" class="release-btn">RELEASE<br />WORDS</button>
-          </div>
-          <div class="micro-status" id="reflexStatus">CREATIVE REFLEX ARMED</div>
-        </section>
-
-        <section class="editor-shell">
-          <div class="editor-toolbar">
-            <select id="modeSelect" aria-label="Writing mode">
-              <option>Free Write</option><option>Poetry</option><option>Novel / Book</option><option>Short Story</option><option>Memoir</option><option>Script</option><option>Spoken Word</option>
-            </select>
-            <button id="undoBtn" title="Undo">↶</button>
-            <button id="redoBtn" title="Redo">↷</button>
-            <button id="proseConsBtn">PROSE &amp; CONS</button>
-            <span id="wordCount">0 WORDS</span>
-          </div>
-          <textarea id="editor" spellcheck="true" aria-label="FLUIE writing editor" placeholder="Write inside the machine…"></textarea>
-        </section>
+        <div class="torso-plaque"><strong>GRAMMATICALLY WRONG.</strong><span>CREATIVELY RIGHT.</span></div>
+        <section class="seed-console"><label for="seedInput">FEED FLUIE A WORD / PHRASE / TYPO / IDEA</label><div class="seed-row"><input id="seedInput" autocomplete="off" placeholder="Try: instink, facation, punctination…" /><button id="releaseBtn" class="release-btn">RELEASE<br />WORDS</button></div><div class="micro-status" id="reflexStatus">CREATIVE REFLEX ARMED</div></section>
+        <section class="editor-shell"><div class="editor-toolbar"><select id="modeSelect" aria-label="Writing mode"><option>Free Write</option><option>Poetry</option><option>Novel / Book</option><option>Short Story</option><option>Memoir</option><option>Script</option><option>Spoken Word</option></select><button id="undoBtn" title="Undo">↶</button><button id="redoBtn" title="Redo">↷</button><button id="proseConsBtn">PROSE &amp; CONS</button><span id="wordCount">0 WORDS</span></div><textarea id="editor" spellcheck="true" aria-label="OH MY WORD writing editor" placeholder="Write inside the machine…"></textarea></section>
       </div>
 
-      <div class="core" id="core" role="status" aria-live="polite">
-        <span>?</span><span>!</span>
-      </div>
-
-      <div class="foot foot-period" aria-hidden="true">.</div>
-      <div class="foot foot-comma" aria-hidden="true">,</div>
-
-      <div class="lever-rig">
-        <span>EMERGENCY<br />WORD RELEASE</span>
-        <button id="bigLever" aria-label="Pull the absurdly large word release lever"><i></i></button>
-      </div>
+      <div class="core" id="core" role="status" aria-live="polite"><span>?</span><span>!</span></div>
+      <div class="foot foot-period" aria-hidden="true">.</div><div class="foot foot-comma" aria-hidden="true">,</div>
+      <div class="lever-rig"><span>EMERGENCY<br />WORD RELEASE</span><button id="bigLever" aria-label="Pull the absurdly large word release lever"><i></i></button></div>
     </section>
 
     <aside class="right-rig">
-      <section class="panel-metal reflex-panel">
-        <div class="panel-heading">
-          <h2>CREATIVE REFLEX</h2>
-          <span id="reflexBadge">APPOOVED</span>
-        </div>
-        <div id="branches" class="branches">
-          <p class="empty-note">Release a word. FLUIE will immediately start sticking things together.</p>
-        </div>
-      </section>
-
-      <section class="panel-metal sillybles">
-        <h2>SILLYBLES</h2>
-        <div class="mode-buttons" id="sillyModes">
-          <button data-mode="COLLIDE">COLLIDE</button><button data-mode="RIDDLE">RIDDLE</button><button data-mode="RHYME">RHYME</button><button data-mode="VERSE">VERSE</button><button data-mode="SING">SING</button><button data-mode="SOLVE">SOLVE</button><button data-mode="LAUGH">LAUGH</button><button data-mode="ANOTHER">🥔 ANOTHER</button>
-        </div>
-        <label class="slider-label">COLLISION METER <output id="collisionValue">67</output></label>
-        <input type="range" id="collisionMeter" min="0" max="100" value="67" />
-      </section>
+      <section class="panel-metal reflex-panel"><div class="panel-heading"><h2>CREATIVE REFLEX</h2><span id="reflexBadge">APPOOVED</span></div><div id="branches" class="branches"><p class="empty-note">Release a word. FLUIE will immediately start sticking things together.</p></div></section>
+      <section class="panel-metal sillybles"><h2>SILLYBLES</h2><div class="mode-buttons" id="sillyModes"><button data-mode="COLLIDE">COLLIDE</button><button data-mode="RIDDLE">RIDDLE</button><button data-mode="RHYME">RHYME</button><button data-mode="VERSE">VERSE</button><button data-mode="SING">SING</button><button data-mode="SOLVE">SOLVE</button><button data-mode="LAUGH">LAUGH</button><button data-mode="ANOTHER">🥔 ANOTHER</button></div><label class="slider-label">COLLISION METER <output id="collisionValue">67</output></label><input type="range" id="collisionMeter" min="0" max="100" value="67" /></section>
     </aside>
   </main>
 
   <section class="lower-deck">
-    <div class="drawer panel-metal" id="punctinaryDrawer">
-      <div class="drawer-handle"><span>ROBERT'S PUNCTINARY</span><small>Where words aren’t defined. They’re implicated.</small></div>
-      <div class="punctinary-grid" id="punctinaryGrid"></div>
-      <div class="drawer-actions"><input id="punctinaryInput" placeholder="Add an implicated word…" /><button id="addPunctinaryBtn">IMPLICATE IT</button></div>
-    </div>
-
-    <div class="panel-metal interlace-panel">
-      <div class="panel-heading"><h2>INTERLACE THE INTERFACE</h2><span>LIVE LANGUAGE CIRCUIT</span></div>
-      <svg id="interlaceSvg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-label="Interactive map of word relationships"></svg>
-    </div>
-
-    <div class="panel-metal tools-grid">
-      <button class="tool-card" data-tool="condestruction"><b>WORD CONDESTRUCTION</b><span>Take it apart. Put it back wrong.</span></button>
-      <button class="tool-card" data-tool="antonym"><b>ANTONYM CREATOR</b><span>Find, invent, or weaponize an opposite.</span></button>
-      <button class="tool-card" data-tool="counterbeat"><b>COUNTERBEAT</b><span>Opposites with rhythm.</span></button>
-      <button class="tool-card" data-tool="type"><b>TYPE FLUIE</b><span>Let the poem design itself.</span></button>
-      <button class="tool-card" data-tool="dna"><b>WRITER DNA / INSTINKS</b><span>How you write. Where you jump.</span></button>
-      <button class="tool-card" data-tool="fbb"><b>FBB CONNECTOR</b><span>Fluid Brain Belt boundary ready.</span></button>
-    </div>
+    <div class="drawer panel-metal" id="punctinaryDrawer"><div class="drawer-handle"><span>ROBERT'S PUNCTINARY</span><small>Where words aren’t defined. They’re implicated.</small></div><div class="punctinary-grid" id="punctinaryGrid"></div><div class="drawer-actions"><input id="punctinaryInput" placeholder="Add an implicated word…" /><button id="addPunctinaryBtn">IMPLICATE IT</button></div></div>
+    <div class="panel-metal interlace-panel"><div class="panel-heading"><h2>INTERLACE THE INTERFACE</h2><span>LIVE LANGUAGE CIRCUIT</span></div><svg id="interlaceSvg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-label="Interactive map of word relationships"></svg></div>
+    <div class="panel-metal tools-grid"><button class="tool-card" data-tool="condestruction"><b>WORD CONDESTRUCTION</b><span>Take it apart. Put it back wrong.</span></button><button class="tool-card" data-tool="antonym"><b>ANTONYM CREATOR</b><span>Find, invent, or weaponize an opposite.</span></button><button class="tool-card" data-tool="counterbeat"><b>COUNTERBEAT</b><span>Opposites with rhythm.</span></button><button class="tool-card" data-tool="type"><b>TYPE FLUIE</b><span>Let the poem design itself.</span></button><button class="tool-card" data-tool="dna"><b>WRITER DNA / INSTINKS</b><span>How you write. Where you jump.</span></button><button class="tool-card" data-tool="fbb"><b>FBB CONNECTOR</b><span>Fluid Brain Belt boundary ready.</span></button></div>
   </section>
 
-  <dialog id="toolDialog">
-    <form method="dialog" class="dialog-card">
-      <button class="dialog-close" value="close" aria-label="Close">×</button>
-      <div id="dialogContent"></div>
-    </form>
-  </dialog>
+  <dialog id="toolDialog"><form method="dialog" class="dialog-card"><button class="dialog-close" value="close" aria-label="Close">×</button><div id="dialogContent"></div></form></dialog>
+  <dialog id="pricingDialog"><form method="dialog" class="dialog-card pricing-card"><button class="dialog-close" value="close" aria-label="Close">×</button><h2>OH MY WORD? PRICING</h2><p>Editable placeholders until final pricing is set.</p><div class="pricing-grid"><article><h3>FREE</h3><strong>TBD</strong><p>Writing workspace + starter Creative Reflex.</p></article><article><h3>WRITER</h3><strong>TBD</strong><p>Deep Creative Reflex, Punctinary, Writer DNA, checkpoints.</p></article><article><h3>AUTHOR / STUDIO</h3><strong>TBD</strong><p>Long-form project intelligence, advanced Type FLUIE, FBB integration.</p></article></div></form></dialog>
 
-  <dialog id="pricingDialog">
-    <form method="dialog" class="dialog-card pricing-card">
-      <button class="dialog-close" value="close" aria-label="Close">×</button>
-      <h2>FLUIE PRICING</h2>
-      <p>Editable placeholders until final pricing is set.</p>
-      <div class="pricing-grid">
-        <article><h3>FREE</h3><strong>TBD</strong><p>Writing workspace + starter Creative Reflex.</p></article>
-        <article><h3>WRITER</h3><strong>TBD</strong><p>Deep Creative Reflex, Punctinary, Writer DNA, checkpoints.</p></article>
-        <article><h3>AUTHOR / STUDIO</h3><strong>TBD</strong><p>Long-form project intelligence, advanced Type FLUIE, FBB integration.</p></article>
-      </div>
-    </form>
-  </dialog>
-
-  <footer>
-    <strong>GRAMMAR SLAMMER SENTENCE TIME VERSE REVERSE AND CURSE AND RHYME</strong>
-    <span>FLUIE v1 • CONDESTRUCTION BUILD</span>
-  </footer>
-
+  <footer><strong>GRAMMAR SLAMMER SENTENCE TIME VERSE REVERSE AND CURSE AND RHYME</strong><span>OH MY WORD? • POWERED BY FLUIE • CONDESTRUCTION BUILD</span></footer>
   <script src="./app.js"></script>
 </body>
 </html>
