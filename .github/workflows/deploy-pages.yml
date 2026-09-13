@@ -24,6 +24,57 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Build automatic app gallery registry
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+          from html import unescape
+
+          root = Path('.')
+          gallery = root / 'apps'
+          gallery.mkdir(exist_ok=True)
+          apps = []
+
+          def text(pattern, source):
+              m = re.search(pattern, source, re.I | re.S)
+              if not m:
+                  return ''
+              return re.sub(r'<[^>]+>', '', unescape(m.group(1))).strip()
+
+          for index in sorted(root.rglob('index.html')):
+              rel = index.relative_to(root)
+              parts = rel.parts
+              if rel == Path('index.html'):
+                  continue
+              if parts[0] in {'.git', '.github', 'apps'}:
+                  continue
+              source = index.read_text(encoding='utf-8', errors='ignore')
+              title = text(r'<title[^>]*>(.*?)</title>', source) or index.parent.name.replace('-', ' ').replace('_', ' ')
+              description = text(r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']', source)
+              if not description:
+                  description = text(r'<meta[^>]+content=["\'](.*?)["\'][^>]+name=["\']description["\']', source)
+              folder = index.parent.as_posix()
+              slug = index.parent.name
+              app_type = 'GALLERY' if 'gallery' in slug.lower() else ('MACHINE' if 'machine' in title.lower() else 'APP / PROGRAM')
+              apps.append({
+                  'slug': slug,
+                  'title': title,
+                  'description': description or 'Fluid Systems build',
+                  'href': '../' + folder.rstrip('/') + '/',
+                  'type': app_type,
+                  'path': folder,
+              })
+
+          apps.sort(key=lambda a: a['title'].lower())
+          payload = {'generated_by': 'Fluid Systems auto-gallery', 'count': len(apps), 'apps': apps}
+          (gallery / 'apps-manifest.json').write_text(json.dumps(payload, indent=2), encoding='utf-8')
+          print(f'Indexed {len(apps)} deployable builds into apps/apps-manifest.json')
+          for app in apps:
+              print(' -', app['title'], '=>', app['href'])
+          PY
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
