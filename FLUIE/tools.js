@@ -1,0 +1,12 @@
+const editor=document.querySelector('#editor');
+const dialog=document.querySelector('#toolDialog');
+const out=document.querySelector('#dialogContent');
+const esc=s=>String(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+const words=()=>editor.value.trim().split(/\s+/).filter(Boolean);
+function show(title,body){out.innerHTML='<h2>'+esc(title)+'</h2>'+body;dialog.showModal();}
+function proseCons(){const text=editor.value.trim();if(!text)return show('PROSE & CONS','<p>Write something first. FLUIE cannot diagnose an empty page, although it respects the commitment.</p>');const w=words();const avg=(w.reduce((n,x)=>n+x.length,0)/Math.max(1,w.length)).toFixed(1);const repeated=[...new Set(w.map(x=>x.toLowerCase().replace(/[^a-z']/g,'')).filter((x,i,a)=>x&&a.indexOf(x)!==i))].slice(0,8);show('PROSE & CONS','<div class="analysis-card"><h3>PROSE</h3><p>'+w.length+' words. Average word length '+avg+'. Your original remains untouched.</p><h3>CONS</h3><p>'+(repeated.length?'Repeated words worth checking: '+esc(repeated.join(', '))+'.':'No obvious repetition cluster found.')+'</p><p><b>GRAMMATICALLY WRONG. CREATIVELY RIGHT.</b> Intentional rule-breaking stays yours.</p></div>');}
+function tool(name){const seed=(document.querySelector('#seedInput').value||'word').trim();const map={condestruction:['WORD CONDESTRUCTION','Break '+esc(seed)+' into sounds, syllables, fragments and meanings, then rebuild it into unexpected relatives.'],antonym:['ANTONYM CREATOR','FLUIE looks for literal, emotional, conceptual and invented opposites of '+esc(seed)+'.'],counterbeat:['COUNTERBEAT','Build alternating lines where each thought answers with its semantic opposite.'],type:['TYPE FLUIE','Poetry in. Typography out. This module will map emphasis, rhythm, repetition and collision into editable type.'],dna:['WRITER DNA / INSTINKS','Learns what you keep, reject, repeat and bend so FLUIE can strengthen your voice instead of flattening it.'],fbb:['FLUID BRAIN BELT','FBB is the permission boundary that lets FLUIE exchange approved discoveries with other Fluid Systems apps.']};const v=map[name]||['FLUIE','Module APPOOVED.'];show(v[0],'<p>'+v[1]+'</p>');}
+document.querySelector('#proseConsBtn').onclick=proseCons;
+document.querySelectorAll('.tool-card').forEach(b=>b.onclick=()=>tool(b.dataset.tool));
+document.querySelector('#undoBtn').onclick=()=>document.execCommand('undo');
+document.querySelector('#redoBtn').onclick=()=>document.execCommand('redo');
