@@ -1,0 +1,72 @@
+:root{font-family:Inter,system-ui,sans-serif;color:#d8dde1;background:#24292e}*{box-sizing:border-box}body{margin:0;height:100vh;display:grid;grid-template-rows:46px 32px 1fr 26px;overflow:hidden}header,footer,#menubar{display:flex;align-items:center;gap:6px;background:#30363b;border-bottom:1px solid #41484e;padding:6px 10px}header strong{margin-right:auto;font-weight:600}header #status{font-size:10px;color:#9eabb5}button,.button,select{background:#394147;color:#d9dee2;border:1px solid #4b555d;border-radius:4px;padding:5px 7px;font:inherit;font-size:10px;cursor:pointer}button:hover,.button:hover,button.active{background:#46525b;border-color:#718596}#menubar{background:#292f34;padding:3px 8px}#menubar button{background:transparent;border-color:transparent}#context{margin-left:auto;font-size:10px;color:#9eabb5}main{display:grid;grid-template-columns:150px 1fr 270px;min-height:0}aside{background:#2d3338;padding:8px;border-right:1px solid #41484e;overflow:auto}#inspect{border-right:0;border-left:1px solid #41484e;padding:0}#inspect section{padding:8px;border-bottom:1px solid #41484e}h3{font-size:11px;margin:2px 0 7px;text-transform:uppercase;letter-spacing:.06em;color:#b7c0c6}.toolgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px}.toolgrid button{height:44px;font-size:17px}.toolgrid small{display:block;font-size:8px;color:#aeb8bf}.actions{display:grid;gap:4px;margin-top:8px}#tools label,#inspect>section>label{display:grid;grid-template-columns:1fr 58px;align-items:center;font-size:10px;margin:7px 0}input,select{background:#242a2f;color:#ddd;border:1px solid #4b555d;border-radius:3px;padding:4px;min-width:0;width:100%}input[type=color]{width:55px;height:25px;padding:1px}input[type=range]{width:58px;padding:0}.wide{display:block!important;width:100%;text-align:center;margin:6px 0!important}.row,.layerActions{display:flex;gap:3px;margin:4px 0}.row button,.layerActions button{flex:1}.transform{display:grid;grid-template-columns:1fr 1fr;gap:4px}.transform label{font-size:9px;display:grid;grid-template-columns:32px 1fr;align-items:center}hr{border:0;border-top:1px solid #41484e}#workspace{overflow:auto;background:#252b30;background-image:radial-gradient(#3b4349 1px,transparent 1px);background-size:18px 18px;padding:38px}#artboard{width:min(1000px,100%);aspect-ratio:10/7;margin:auto;background:#f4f2ed;box-shadow:0 5px 22px #15191c;border:1px solid #555}#canvas{display:block;width:100%;height:100%;touch-action:none;user-select:none}.layer{display:grid;grid-template-columns:18px 18px 1fr;gap:4px;align-items:center;padding:6px;border-bottom:1px solid #3e464c;font-size:10px;cursor:pointer}.layer.selected{background:#414d56}.layer .muted{opacity:.45}.hint{font-size:9px;line-height:1.4;color:#98a3aa}.selection-box{fill:none;stroke:#5e7f98;stroke-width:1.5;stroke-dasharray:5 3;pointer-events:none}.node{fill:#eef1f2;stroke:#536f84;stroke-width:1.5;cursor:move}.bezier-line{stroke:#718896;stroke-width:1;fill:none;pointer-events:none}footer{border-top:1px solid #41484e;border-bottom:0;justify-content:space-between;font-size:9px;color:#aeb7bd;padding:3px 10px}@media(max-width:800px){main{grid-template-columns:120px 1fr}#inspect{display:none}#workspace{padding:16px}}
+
+/* Tool-specific workspace cursors: apply through SVG descendants so drawn objects do not steal the active tool pointer. */
+#canvas[data-tool="select"],#canvas[data-tool="select"] *{cursor:default!important}
+#canvas[data-tool="direct"],#canvas[data-tool="direct"] *{cursor:crosshair!important}
+#canvas[data-tool="pen"],#canvas[data-tool="pen"] *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M6 27l5-13 9-9 7 7-9 9-12 6z' fill='%23e7ebee' stroke='%232b3237' stroke-width='1.5'/%3E%3Ccircle cx='11' cy='21' r='2.2' fill='%232b3237'/%3E%3C/svg%3E") 6 27,crosshair!important}
+#canvas[data-tool="pencil"],#canvas[data-tool="pencil"] *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M5 25l2-7L22 3l7 7-15 15-9 2z' fill='%23e7ebee' stroke='%232b3237' stroke-width='1.5'/%3E%3C/svg%3E") 5 27,crosshair!important}
+#canvas[data-tool="text"],#canvas[data-tool="text"] *{cursor:text!important}
+#canvas[data-tool="hand"],#canvas[data-tool="hand"] *{cursor:grab!important}
+#canvas[data-tool="rect"],#canvas[data-tool="rect"] *,#canvas[data-tool="ellipse"],#canvas[data-tool="ellipse"] *,#canvas[data-tool="polygon"],#canvas[data-tool="polygon"] *,#canvas[data-tool="line"],#canvas[data-tool="line"] *{cursor:crosshair!important}
+
+.menu{position:relative}.menu>.dropdown{display:none;position:absolute;top:100%;left:0;z-index:50;min-width:170px;background:#30363b;border:1px solid #4b555d;border-radius:4px;padding:4px;box-shadow:0 8px 24px #15191c}.menu.open>.dropdown{display:grid}.menu>.dropdown button{text-align:left;background:transparent;border:0;padding:7px 9px}.menu>.dropdown button:hover{background:#46525b}.context-menu{position:fixed;z-index:1000;min-width:180px;background:#30363b;border:1px solid #59636b;border-radius:5px;padding:4px;box-shadow:0 10px 28px #111}.context-menu button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:7px 10px}.context-menu button:hover{background:#46525b}.context-menu[hidden]{display:none!important}
+
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}.swatches button{height:28px;padding:0;border:1px solid #68737b}.dropdown hr{width:100%;border:0;border-top:1px solid #465057;margin:3px 0}.outline-view #content *{fill:none!important;stroke:#687f91!important;stroke-width:1!important}@media print{header,#menubar,#tools,#inspect,footer{display:none!important}body{display:block;background:white}main{display:block}#workspace{background:white;padding:0}#artboard{box-shadow:none;border:0;margin:0}}
+
+.view-grid #artboard{background-color:#f4f2ed;background-image:linear-gradient(#d9d7d2 1px,transparent 1px),linear-gradient(90deg,#d9d7d2 1px,transparent 1px);background-size:20px 20px}.view-rulers #workspace{border-top:18px solid #394147;border-left:18px solid #394147}.view-guides #artboard{outline:1px solid #72889a}.view-smart-guides .selection-box{stroke:#8aa0b2;stroke-dasharray:2 2}
+
+/* v0.8.1: primary menus stay prominent at the top */
+body{grid-template-rows:54px 46px 1fr 28px}
+#menubar{order:0;padding:6px 12px;gap:4px;min-height:46px;overflow:visible}
+#menubar>.menu>button{font-size:15px;font-weight:600;padding:8px 12px;line-height:1.1;color:#e5e8ea}
+.menu>.dropdown{top:calc(100% + 2px);min-width:230px;padding:6px}
+.menu>.dropdown button{font-size:14px;padding:9px 12px;min-height:36px}
+#context{font-size:12px}
+header{min-height:54px}
+header button,header .button{font-size:12px;padding:7px 10px}
+
+/* v0.8.2: centered primary menu bar */
+#menubar{position:relative;justify-content:center;padding-left:12px;padding-right:12px}
+#menubar>.menu{flex:0 0 auto}
+#menubar>#context{position:absolute;right:12px;margin-left:0}
+
+
+/* Pointer routing: the SVG UI layer is display-only except for direct manipulation handles. */
+#ui{pointer-events:none}
+#ui .resize-handle,#ui .rotate-hover,#ui .node,#ui .bezier-handle{pointer-events:all}
+#ui .rotate-hover{cursor:grab}
+#ui .rotate-hover:active{cursor:grabbing}
+.resize-handle{fill:#eef1f2;stroke:#536f84;stroke-width:1.5}
+#canvas[data-tool="select"] .resize-handle{cursor:nwse-resize!important}
+
+/* Layer drag/reorder feedback */
+.layer[draggable="true"]{cursor:grab}.layer.dragging{opacity:.45}.layer.drag-over{outline:1px solid #8aa0b2;outline-offset:-1px}.layer-eye,.layer-lock{padding:2px;min-width:18px;border:0;background:transparent;font-size:11px}
+
+/* Document dialog and rulers */
+#newDocDialog{min-width:520px;background:#252b30;color:#eef2f4;border:1px solid #58636c;border-radius:8px;padding:22px}#newDocDialog::backdrop{background:rgba(0,0,0,.6)}#newDocDialog h2{margin-top:0}#newDocDialog label{display:block;margin:10px 0}#newDocDialog input,#newDocDialog select{width:100%;box-sizing:border-box}.ruler{display:none;position:absolute;background:#2b3035;color:#b9c1c7;font-size:9px;z-index:4;overflow:hidden}.view-rulers .ruler{display:block}.ruler.horizontal{left:24px;right:0;top:0;height:24px}.ruler.vertical{top:24px;bottom:0;left:0;width:24px}.ruler span{position:absolute}.ruler.horizontal span{top:5px;border-left:1px solid #69747c;padding-left:2px}.ruler.vertical span{left:3px;border-top:1px solid #69747c;width:21px}.view-rulers #artboard{margin-top:24px;margin-left:24px}
+
+/* Font browser */
+.font-list{max-height:150px;overflow:auto;display:grid;gap:2px;margin:5px 0 9px}.font-list button{text-align:left;padding:5px 7px;background:#30363b;color:#eef2f4;border:1px solid #454e55;border-radius:3px}.font-list button:hover{background:#3b4349}
+
+/* Symbols */
+.symbol-list{display:grid;gap:3px;max-height:140px;overflow:auto;margin:7px 0}.symbol-list button{text-align:left;padding:5px 7px;background:#30363b;color:#eef2f4;border:1px solid #454e55;border-radius:3px}.symbol-list button.active{outline:1px solid #9aaab6;background:#414a51}
+
+/* Direct editing overlays */
+.node{fill:#fff;stroke:#0174F3;stroke-width:2;pointer-events:all;cursor:pointer}
+.bezier-handle{fill:#0174F3;stroke:#fff;stroke-width:1;pointer-events:all;cursor:pointer}
+.handle-line{stroke:#0174F3;stroke-width:1;pointer-events:none}
+.resize-handle{fill:#fff;stroke:#0174F3;stroke-width:2;pointer-events:all;cursor:nwse-resize}
+.pen-preview{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+
+/* Vector Brush Engine */
+#vectorBrushPanel summary{cursor:pointer;font-size:10px;margin:7px 0;color:#b7c0c6}
+#vectorBrushPanel details{border-top:1px solid #41484e;margin-top:7px;padding-top:4px}
+#vectorBrushPanel #brushCoach{border-left:2px solid #0174F3;padding:6px 7px;margin:7px 0;background:#272e33}
+#vectorBrushPanel input[type=range]{width:100%}
+
+.type-grid-guide{stroke:#0174F3;stroke-width:.7;stroke-opacity:.35;pointer-events:none;vector-effect:non-scaling-stroke}
+@media print{.type-grid-guide{display:none!important}}
+
+.brush-preview{height:74px;background:#f4f2ed;border:1px solid #4b555d;border-radius:4px;margin:7px 0;overflow:hidden}.brush-preview svg{width:100%;height:100%}.brush-preview path{vector-effect:non-scaling-stroke}
+
+.node.active-node{fill:#0174F3;stroke:#fff;stroke-width:2}.bezier-handle{fill:#fff;stroke:#0174F3;stroke-width:1.5}.handle-line{stroke:#0174F3;stroke-width:1;opacity:.8}
