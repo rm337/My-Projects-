@@ -72,6 +72,7 @@ function fvsSelectWord(editor,e){const r=fvsCaretAt(editor,e);if(!r)return false
 content.addEventListener('pointerdown',e=>{const editor=fvsTextEditorFromEvent(e);if(!editor||tool!=='text')return;e.stopPropagation();const fo=editor.closest('foreignObject');if(fo&&!sel.includes(fo)){sel=[fo];renderLayers()}editor.focus()});
 content.addEventListener('dblclick',e=>{const editor=fvsTextEditorFromEvent(e);if(!editor||tool!=='text')return;e.preventDefault();e.stopPropagation();if(fvsSelectWord(editor,e))$('#status').textContent='Word selected.'});
 content.addEventListener('click',e=>{const editor=fvsTextEditorFromEvent(e);if(!editor||tool!=='text')return;e.stopPropagation();if(e.detail>=3){e.preventDefault();const q=document.createRange(),s=window.getSelection();q.selectNodeContents(editor);s.removeAllRanges();s.addRange(q);$('#status').textContent='All text selected.'}});
+content.addEventListener('dblclick',e=>{const t=e.target.closest?.(':scope > text')||e.target.closest?.('#content > text');if(!t)return;e.preventDefault();e.stopPropagation();const v=prompt('Edit text',t.textContent||'');if(v!==null){checkpoint('Edit text');t.textContent=v;sel=[t];refresh();persist();$('#status').textContent='Text updated.'}},true);
 svg.addEventListener('pointerdown',e=>{
  if(tool==='area-text'&&e.target===svg){e.preventDefault();const p=P(e);checkpoint('Area Type');const fo=make('foreignObject','Area Text');A(fo,{x:p.x,y:p.y,width:1,height:1,fill:'none',stroke:'none','stroke-width':0,opacity:1});const div=document.createElementNS('http://www.w3.org/1999/xhtml','div');div.setAttribute('contenteditable','true');div.style.cssText='width:100%;height:100%;box-sizing:border-box;outline:none;border:0;background:transparent;padding:4px;font:'+($('#fontWeight')?.value||400)+' '+($('#fontSize')?.value||36)+'px '+($('#fontFamily')?.value||'Arial')+';color:'+($('#fill').value||'#26323c')+';overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;';fo.append(div);areaTextDrag={fo,div,start:p,pointerId:e.pointerId};selected(fo);svg.setPointerCapture?.(e.pointerId);$('#status').textContent='Area Type: drag a text box as large as you want, release, then type.';return}
 const p=P(e),target=e.target.closest('#content > *');
@@ -83,26 +84,15 @@ const p=P(e),target=e.target.closest('#content > *');
  if(tool==='direct'){let direct=e.target.closest('#content path');if(direct&&fvsSelectable(direct)){if(!e.shiftKey)sel=[];if(!sel.includes(direct))sel.push(direct);directNode=null;refresh();$('#status').textContent='Direct Select: click an anchor or handle, then drag it. Alt-click an anchor deletes it.'}else{directNode=null;if(target&&fvsSelectable(target))selected(target,e.shiftKey);else if(!e.shiftKey){sel=[];refresh()}}return}
  if(tool==='pen'){e.preventDefault();if(!pen){checkpoint();const el=make('path','Bezier Path');A(el,{fill:'none',stroke:penPreviewStroke(),'stroke-width':Math.max(2,+$('#strokeWidth').value||2),'stroke-linecap':'round','stroke-linejoin':'round',d:'M '+p.x+' '+p.y});pen={el,anchors:[{x:p.x,y:p.y,in:null,out:null}],closed:false,dragIndex:0,down:p};sel=[el];refresh()}else{const first=pen.anchors[0];if(!pen.baseD&&pen.anchors.length>2&&Math.hypot(p.x-first.x,p.y-first.y)<12){finishPen(true);return}pen.anchors.push({x:p.x,y:p.y,in:null,out:null});pen.dragIndex=pen.anchors.length-1;pen.down=p;updatePen();sel=[pen.el];refresh()}svg.setPointerCapture?.(e.pointerId);return}
  if(tool==='text'){
-  const existing=e.target.closest?.('#content foreignObject,#content text');
-  if(existing?.matches('foreignObject')){return;}  if(existing?.tagName==='text'){
-    selected(existing);
-    $('#status').textContent='Legacy text selected. New text objects support normal editing and selection.';
-    return;
-  }
-  e.preventDefault();
-  if(textEdit){if(textEdit.value)textEdit.el.textContent=textEdit.value;else textEdit.el.remove();textEdit=null;persist()}
-  checkpoint('Create text');
-  const p0=p,fo=make('foreignObject','Area Text');
-  A(fo,{x:p0.x,y:p0.y,width:1,height:1,fill:'none',stroke:'none','stroke-width':0,opacity:1});
-  const div=document.createElementNS('http://www.w3.org/1999/xhtml','div');
-  div.setAttribute('contenteditable','true');
-  div.style.cssText='width:100%;height:100%;box-sizing:border-box;outline:none;border:0;background:transparent;padding:4px;font:'+($('#fontWeight')?.value||400)+' '+($('#fontSize')?.value||36)+'px '+($('#fontFamily')?.value||'Arial')+';color:'+($('#fill').value||'#26323c')+';overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;';
-  div.textContent='Type here';
-  fo.append(div);areaTextDrag={fo,div,start:p0,pointerId:e.pointerId,fromType:true};
-  sel=[fo];renderLayers();svg.setPointerCapture?.(e.pointerId);
-  $('#status').textContent='Type Tool: click for a text box or drag to size it.';
+  const existing=e.target.closest?.('#content > text');
+  if(existing){selected(existing);return}
+  e.preventDefault();checkpoint('Create text');
+  const t=make('text','Text');A(t,{x:p.x,y:p.y,fill:($('#fill').value&&$('#fill').value!=='none')?$('#fill').value:'#26323c','font-size':+($('#fontSize')?.value||36),'font-family':$('#fontFamily')?.value||'Arial','font-weight':$('#fontWeight')?.value||400,'dominant-baseline':'hanging'});
+  t.textContent='Type here';sel=[t];refresh();persist();
+  const range=document.createRange(),selection=window.getSelection();range.selectNodeContents(t);selection.removeAllRanges();selection.addRange(range);
+  $('#status').textContent='Text created. Double-click text to edit.';
   return;
-}
+ }
  if(tool==='hand')return;checkpoint();start=p;
  if(tool==='rect'){drawing=make('rect','Rectangle');A(drawing,{x:p.x,y:p.y,width:0,height:0})}
  if(tool==='ellipse'){drawing=make('ellipse','Ellipse');A(drawing,{cx:p.x,cy:p.y,rx:0,ry:0})}
