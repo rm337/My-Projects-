@@ -76,7 +76,67 @@ const p=P(e),target=e.target.closest('#content > *');
  if(tool==='select'){if(target&&!fvsSelectable(target))target=null;if(!target){if(!e.shiftKey)sel=[];refresh();const box=E('rect');A(box,{x:p.x,y:p.y,width:0,height:0,fill:'rgba(1,116,243,.06)',stroke:'#0174F3','stroke-width':1,'stroke-dasharray':'4 3','pointer-events':'none'});ui.append(box);marquee={start:p,el:box,add:e.shiftKey,base:e.shiftKey?[...sel]:[]};svg.setPointerCapture?.(e.pointerId);return}selected(target,e.shiftKey);if(target.dataset.locked!=='1'&&target.style.display!=='none'){checkpoint();moving={x:p.x,y:p.y,els:[...sel],base:sel.map(x=>x.getAttribute('transform')||'')};svg.setPointerCapture?.(e.pointerId)}return}
  if(tool==='direct'){let direct=e.target.closest('#content path');if(direct&&fvsSelectable(direct)){if(!e.shiftKey)sel=[];if(!sel.includes(direct))sel.push(direct);directNode=null;refresh();$('#status').textContent='Direct Select: click an anchor or handle, then drag it. Alt-click an anchor deletes it.'}else{directNode=null;if(target&&fvsSelectable(target))selected(target,e.shiftKey);else if(!e.shiftKey){sel=[];refresh()}}return}
  if(tool==='pen'){e.preventDefault();if(!pen){checkpoint();const el=make('path','Bezier Path');A(el,{fill:'none',stroke:penPreviewStroke(),'stroke-width':Math.max(2,+$('#strokeWidth').value||2),'stroke-linecap':'round','stroke-linejoin':'round',d:'M '+p.x+' '+p.y});pen={el,anchors:[{x:p.x,y:p.y,in:null,out:null}],closed:false,dragIndex:0,down:p};sel=[el];refresh()}else{const first=pen.anchors[0];if(!pen.baseD&&pen.anchors.length>2&&Math.hypot(p.x-first.x,p.y-first.y)<12){finishPen(true);return}pen.anchors.push({x:p.x,y:p.y,in:null,out:null});pen.dragIndex=pen.anchors.length-1;pen.down=p;updatePen();sel=[pen.el];refresh()}svg.setPointerCapture?.(e.pointerId);return}
- if(tool==='text'){const existing=e.target.closest?.('#content foreignObject,#content text');if(existing?.matches('foreignObject')){const editor=existing.querySelector('[contenteditable="true"]');if(editor){const caret=document.caretRangeFromPoint?.(e.clientX,e.clientY);if(e.detail>=3){e.preventDefault();const range=document.createRange(),s=window.getSelection();range.selectNodeContents(editor);s.removeAllRanges();s.addRange(range);$('#status').textContent='All text selected.';return}if(e.detail===2){e.preventDefault();if(caret&&editor.contains(caret.startContainer)){const node=caret.startContainer.nodeType===3?caret.startContainer:caret.startContainer.firstChild;if(node?.nodeType===3){const str=node.data,at=Math.min(caret.startOffset,str.length);let l=at,h=at;while(l>0&&/[^\s]/.test(str[l-1]))l--;while(h<str.length&&/[^\s]/.test(str[h]))h++;const range=document.createRange(),s=window.getSelection();range.setStart(node,l);range.setEnd(node,h);s.removeAllRanges();s.addRange(range)}}$('#status').textContent='Word selected.';return}if(caret&&editor.contains(caret.startContainer)){e.preventDefault();editor.focus();textSelectDrag={editor,node:caret.startContainer,offset:caret.startOffset};const s=window.getSelection();s.removeAllRanges();s.addRange(caret);svg.setPointerCapture?.(e.pointerId);$('#status').textContent='Drag to select text.';return}}}if(!existing)e.preventDefault();if(existing){const editor=existing.matches('foreignObject')?existing.querySelector('[contenteditable="true"]'):null;if(existing.tagName==='text'){selected(existing);existing.setAttribute('contenteditable','true');existing.style.userSelect='text';existing.style.webkitUserSelect='text';$('#status').textContent='Existing point text selected. Double-click to edit or drag across area text to highlight.';return}if(editor){if(!sel.includes(existing)){sel=[existing];renderLayers()}editor.focus();if(e.detail>=3){const range=document.createRange(),selection=window.getSelection();range.selectNodeContents(editor);selection.removeAllRanges();selection.addRange(range);$('#status').textContent='All text selected.'}else if(e.detail===2){const caret=document.caretRangeFromPoint?.(e.clientX,e.clientY);if(caret&&editor.contains(caret.startContainer)){const node=caret.startContainer.nodeType===3?caret.startContainer:caret.startContainer.firstChild;if(node?.nodeType===3){const s=node.data,at=Math.min(caret.startOffset,s.length);let left=at,right=at;while(left>0&&/[^\s]/.test(s[left-1]))left--;while(right<s.length&&/[^\s]/.test(s[right]))right++;const range=document.createRange(),selection=window.getSelection();range.setStart(node,left);range.setEnd(node,right);selection.removeAllRanges();selection.addRange(range)}}$('#status').textContent='Text section selected.'}else $('#status').textContent='Editing text. Drag across characters to select.';return}}if(textEdit){if(textEdit.value)textEdit.el.textContent=textEdit.value;else textEdit.el.remove();textEdit=null;persist()}checkpoint('Create text');const p0=p;const fo=make('foreignObject','Area Text');A(fo,{x:p0.x,y:p0.y,width:1,height:1,fill:'none',stroke:'none','stroke-width':0,opacity:1});const div=document.createElementNS('http://www.w3.org/1999/xhtml','div');div.setAttribute('contenteditable','true');div.style.cssText='width:100%;height:100%;box-sizing:border-box;outline:none;border:0;background:transparent;padding:4px;font:'+($('#fontWeight')?.value||400)+' '+($('#fontSize')?.value||36)+'px '+($('#fontFamily')?.value||'Arial')+';color:'+($('#fill').value||'#26323c')+';overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;';fo.append(div);areaTextDrag={fo,div,start:p0,pointerId:e.pointerId,fromType:true};selected(fo);svg.setPointerCapture?.(e.pointerId);$('#status').textContent='Type Tool: drag a text box as large as you want, release, then type.';return}
+ if(tool==='text'){
+  const existing=e.target.closest?.('#content foreignObject,#content text');
+  if(existing?.matches('foreignObject')){
+    const editor=existing.querySelector('[contenteditable="true"]');
+    if(editor){
+      if(!sel.includes(existing)){sel=[existing];renderLayers()}
+      editor.focus();
+      const caret=document.caretRangeFromPoint?.(e.clientX,e.clientY);
+      if(e.detail>=3){
+        e.preventDefault();
+        const range=document.createRange(),selection=window.getSelection();
+        range.selectNodeContents(editor);selection.removeAllRanges();selection.addRange(range);
+        $('#status').textContent='All text selected.';
+        return;
+      }
+      if(e.detail===2){
+        e.preventDefault();
+        if(caret&&editor.contains(caret.startContainer)){
+          const node=caret.startContainer.nodeType===3?caret.startContainer:caret.startContainer.firstChild;
+          if(node?.nodeType===3){
+            const str=node.data,at=Math.min(caret.startOffset,str.length);
+            let left=at,right=at;
+            while(left>0&&/[^\\s]/.test(str[left-1]))left--;
+            while(right<str.length&&/[^\\s]/.test(str[right]))right++;
+            const range=document.createRange(),selection=window.getSelection();
+            range.setStart(node,left);range.setEnd(node,right);
+            selection.removeAllRanges();selection.addRange(range);
+          }
+        }
+        $('#status').textContent='Word selected.';
+        return;
+      }
+      if(caret&&editor.contains(caret.startContainer)){
+        e.preventDefault();
+        const selection=window.getSelection();
+        selection.removeAllRanges();selection.addRange(caret);
+        textSelectDrag={editor,node:caret.startContainer,offset:caret.startOffset};
+        $('#status').textContent='Cursor placed. Drag to select text.';
+        return;
+      }
+      return;
+    }
+  }
+  if(existing?.tagName==='text'){
+    selected(existing);
+    $('#status').textContent='Legacy text selected. New text objects support normal editing and selection.';
+    return;
+  }
+  e.preventDefault();
+  if(textEdit){if(textEdit.value)textEdit.el.textContent=textEdit.value;else textEdit.el.remove();textEdit=null;persist()}
+  checkpoint('Create text');
+  const p0=p,fo=make('foreignObject','Area Text');
+  A(fo,{x:p0.x,y:p0.y,width:1,height:1,fill:'none',stroke:'none','stroke-width':0,opacity:1});
+  const div=document.createElementNS('http://www.w3.org/1999/xhtml','div');
+  div.setAttribute('contenteditable','true');
+  div.style.cssText='width:100%;height:100%;box-sizing:border-box;outline:none;border:0;background:transparent;padding:4px;font:'+($('#fontWeight')?.value||400)+' '+($('#fontSize')?.value||36)+'px '+($('#fontFamily')?.value||'Arial')+';color:'+($('#fill').value||'#26323c')+';overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;';
+  fo.append(div);areaTextDrag={fo,div,start:p0,pointerId:e.pointerId,fromType:true};
+  sel=[fo];renderLayers();svg.setPointerCapture?.(e.pointerId);
+  $('#status').textContent='Type Tool: click for a text box or drag to size it.';
+  return;
+}
  if(tool==='hand')return;checkpoint();start=p;
  if(tool==='rect'){drawing=make('rect','Rectangle');A(drawing,{x:p.x,y:p.y,width:0,height:0})}
  if(tool==='ellipse'){drawing=make('ellipse','Ellipse');A(drawing,{cx:p.x,cy:p.y,rx:0,ry:0})}
