@@ -72,5 +72,8 @@ header button,header .button{font-size:12px;padding:7px 10px}
 .node.active-node{fill:#0174F3;stroke:#fff;stroke-width:2}.bezier-handle{fill:#fff;stroke:#0174F3;stroke-width:1.5}.handle-line{stroke:#0174F3;stroke-width:1;opacity:.8}
 
 /* Editable text must override the canvas drawing surface's no-selection rule. */
-#canvas foreignObject,#canvas foreignObject *{user-select:text;-webkit-user-select:text;pointer-events:auto}
+#canvas foreignObject,#canvas foreignObject *{user-select:text!important;-webkit-user-select:text!important;pointer-events:auto}
 #canvas foreignObject [contenteditable="true"]{cursor:text;touch-action:auto}
+
+#canvas[data-tool="text"] foreignObject [contenteditable="true"]{user-select:text!important;-webkit-user-select:text!important;cursor:text!important}
+#canvas[data-tool="text"] foreignObject [contenteditable="true"]::selection{background:#8abcf0;color:#111}
