@@ -97,6 +97,7 @@ const p=P(e),target=e.target.closest('#content > *');
   const div=document.createElementNS('http://www.w3.org/1999/xhtml','div');
   div.setAttribute('contenteditable','true');
   div.style.cssText='width:100%;height:100%;box-sizing:border-box;outline:none;border:0;background:transparent;padding:4px;font:'+($('#fontWeight')?.value||400)+' '+($('#fontSize')?.value||36)+'px '+($('#fontFamily')?.value||'Arial')+';color:'+($('#fill').value||'#26323c')+';overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;';
+  div.textContent='Type here';
   fo.append(div);areaTextDrag={fo,div,start:p0,pointerId:e.pointerId,fromType:true};
   sel=[fo];renderLayers();svg.setPointerCapture?.(e.pointerId);
   $('#status').textContent='Type Tool: click for a text box or drag to size it.';
